@@ -21,7 +21,7 @@ public class ComTcp implements Runnable{
 	public void run(){
 		try{
 	        ServerSocket server=new ServerSocket(t.port_tcp);
-					
+
 	        while(true)
 	        {
 	          Socket socket =server.accept();

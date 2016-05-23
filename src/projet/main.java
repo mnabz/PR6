@@ -11,9 +11,20 @@ import java.net.UnknownHostException;
 import java.net.SocketException;
 import java.util.regex.Pattern;
 
+
+import java.net.Inet4Address;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.util.Enumeration;
+
+
+
+
+
 public class main {
 
 	public static int portUdp(){
+
 
 		for(int i=1024;i<=9999;i++)
 		 {  try{
@@ -29,12 +40,26 @@ public class main {
 		return -1;
 	}
 
-	public static String myIA(String s){
-		Pattern p = Pattern.compile("[/]");
-	String[] items = p.split(s);
-	return items[1];
+	public static String myIA() throws SocketException{
+
+		String s = null;
+		Enumeration<NetworkInterface> listNi=NetworkInterface.getNetworkInterfaces();
+	 	while(listNi.hasMoreElements()){
+			NetworkInterface nic=listNi.nextElement();
+			Enumeration<InetAddress> listIa=nic.getInetAddresses();
+			while(listIa.hasMoreElements()){
+	 			InetAddress iac=listIa.nextElement();
+				if(iac instanceof Inet4Address && !iac.isLoopbackAddress())
+					{ s=iac.toString();
+					String tab[]=s.split("\\/");
+					return tab[1];
+				}
+			}
+	 	}
+		return null;
 
 	}
+
 
 	/**
 	 * @param args
@@ -60,11 +85,12 @@ public class main {
 		String ip=items[1];
 		String port=items[2];
 
-		int a=1024,b=9999;
+		/*int a=1024,b=9999;
 		String c="localhost";
+*/
 
 		String port_udp=Integer.toString(portUdp());
-		String myIA=myIA(InetAddress.getLocalHost().toString());
+		String myIA=myIA();
 
 		pw.print("WELC "+myIA+" "+port_udp+"\n");
 		//pw.print("WELC \n");
@@ -82,9 +108,10 @@ public class main {
 
 		}
 		catch(Exception e){
-	//	System.out.println(e);
-	//	e.printStackTrace();
-	 entite =new Entite();
+			e.printStackTrace();
+			System.out.println(e);
+
+	// entite =new Entite();
 		}
 }
 

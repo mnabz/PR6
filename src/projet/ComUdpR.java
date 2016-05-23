@@ -32,7 +32,7 @@ public class ComUdpR implements Runnable {
         InetSocketAddress ia=new  InetSocketAddress(t.myIA,t.port_udp_suivant);
         DatagramPacket paquet1=new DatagramPacket(data,data.length,ia);
         t.ds.send(paquet1);
-				t.print();
+				
       }
 
       } catch(Exception e){
