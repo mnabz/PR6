@@ -20,13 +20,13 @@ public class Entite {
 	static	int port_udp_suivant;
 	static	String myIA;
 	static String myIP;
-	String ip_multi;
-	int port_multi;
+	static String ip_diff;
+	static int port_diff;
 	int a=1024;
 	int b=9999;
 	DatagramSocket ds;
 	static Vector<Long> idMess=new Vector<Long>();
-	static int deco;
+	int deco;
 
 	public static String myIA() throws SocketException{
 		String s = null;
@@ -98,7 +98,7 @@ return Character.toString(tab[2].charAt(tab[2].length()-1))+s+Integer.toString(p
 }
 
 
-public Entite (String myIA,int port,int port_suivant) throws UnknownHostException, SocketException{
+public Entite (String myIA,int port,int port_suivant,String ip_diff,int port_diff) throws UnknownHostException, SocketException{
 this.port_udp=port;
 this.myIA=myIA;
 this.port_tcp=portTcp(this.myIA);
@@ -107,6 +107,8 @@ this.port_udp_suivant=port_suivant;
 ds=new DatagramSocket(port_udp);
 this.myIP=myIA();
 this.deco=0;
+this.ip_diff=ip_diff;
+this.port_diff=port_diff;
 }
 
 public Entite () throws UnknownHostException, SocketException{
@@ -118,7 +120,10 @@ this.port_udp_suivant=port_udp;
 ds=new DatagramSocket(port_udp);
 this.myIP=myIA;
 this.deco=0;
+this.ip_diff="225.1.2.4";
+this.port_diff=portUdp();
 }
+
 /*
 public void udp() throws InterruptedException, SocketException{
 
@@ -163,6 +168,8 @@ public static void print(){
 	System.out.println("port_udp_suivant :"+port_udp_suivant);
 	System.out.println("myIA :"+myIA);
 	System.out.println("myId :"+id);
+	System.out.println("ip_diff :"+ip_diff);
+	System.out.println("port_diff :"+port_diff);
 
 }
 

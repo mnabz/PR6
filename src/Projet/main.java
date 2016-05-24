@@ -1,6 +1,7 @@
 package Projet;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
@@ -22,7 +23,8 @@ import java.util.Enumeration;
 
 
 public class main {
-
+	
+	
 
 	public static int portUdp(){
 
@@ -67,7 +69,7 @@ public class main {
 	 * @throws UnknownHostException
 	 * @throws InterruptedException
 	 */
-	public static void main(String[] args) throws UnknownHostException, InterruptedException, SocketException {
+	public static void main(String[] args) throws UnknownHostException, InterruptedException, SocketException,IOException {
 
 		Entite entite=null;
 
@@ -85,7 +87,9 @@ public class main {
 
 		String ip=items[1];
 		String port=items[2];
-
+		String ip_diff=items[3];
+		String port_diff=items[4];
+		
 		/*int a=1024,b=9999;
 		String c="localhost";
 */
@@ -105,7 +109,7 @@ public class main {
 		br.close();
 		socket.close();
 
-		entite =new Entite(ip,Integer.parseInt(port_udp),Integer.parseInt(port));
+		entite =new Entite(ip,Integer.parseInt(port_udp),Integer.parseInt(port),ip_diff,Integer.parseInt(port_diff));
 
 		}
 		catch(Exception e){
@@ -127,28 +131,21 @@ public class main {
 
 		entite.print();
 
-	/*Thread t1=new Thread(new ComUdpE(entite));
+	Thread t1=new Thread(new ComUdpE(entite));
 	Thread t2=new Thread(new ComUdpR(entite));
-	*/Thread t3=new Thread(new ComTcp(entite));
+	Thread t3=new Thread(new ComTcp(entite));
+	Thread t4=new Thread(new ComMulti(entite));
+	
+	
+	t1.start();
+	t2.start();
+	t3.start();
+	t4.start();
 
-
-
-/*
-		t1.start();
-		t2.start();
-	*/	t3.start();
-/*
-		t1.join();
-		t2.join();
-		t3.join();
-
-		while(entite.deco!=2);
-
-		System.exit(0);
-*/
-Thread.sleep(3000);
-t3.interrupt();
-
+	t1.join();
+	t2.join();
+	t3.join();
+	t4.join();
 
 	}
 

@@ -42,7 +42,7 @@ public class Message {
 		return "MEMB "+Long.toString(this.idm)+" "+id+" "+ip+" "+Integer.toString(port);
 	}
   public String GBYE(String ip,int port,String ip_succ,int port_succ){
-    return "GBYE "+Long.toString(this.idm)+" "+ip+" "+Integer.toString(port)+" "+ip_succ+" "+Integer.toString(port_succ);
+    return "MEMB "+Long.toString(this.idm)+" "+ip+" "+Integer.toString(port)+" "+ip_succ+" "+Integer.toString(port_succ);
   }
 
     public String EYBG(){

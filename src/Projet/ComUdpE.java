@@ -36,9 +36,7 @@ public void run(){
 				{
 				//String s=null;
 				//	mess =new Message(Long.valueOf(tab[1]).longValue());
-				if(t.idMess.contains(Long.valueOf(tab[1]).longValue()))
-					t.idMess.remove(Long.valueOf(tab[1]).longValue());
-				else
+				if(!t.idMess.contains(Long.valueOf(tab[1]).longValue()))
 				{
 					if (tab[0].equals("WHOS"))
 						{//message.add(mess.WHOS());
@@ -50,26 +48,24 @@ public void run(){
 			    	}else if (tab[0].equals("MEMB"))
 			    	{	message.add(st3);
 
-					}else if (tab[0].equals("GBYE"))
+					}else if (tab[0].equals("GBYE"))								
 					{
 						if (tab[2].equals(t.myIA) && Integer.parseInt(tab[3])==t.port_udp_suivant)
 							{
-
+							  t.myIA=tab[4];
+							  t.port_udp_suivant=Integer.parseInt(tab[5]);
 							  Message	mess1 =new Message(t.id);
 							  t.idMess.add(mess1.idm);
 							  message.add(mess1.EYBG());
-								System.out.print("c'est moi");
 							}else
 							message.add(st3);
-
+					
 					}else if (tab[0].equals("EYBG"))
-						{
-							if(t.deco==1)
-							{t.deco=2;
-
-							}
-						else
+						{if(t.deco==1)
+							t.deco=2;
+						else 
 							message.add(st3);
+													
 						}
 
 				for (int i=0;i<message.size();i++)
@@ -78,11 +74,6 @@ public void run(){
 	            InetSocketAddress ia=new  InetSocketAddress(t.myIA,t.port_udp_suivant);
 	            DatagramPacket paquet1=new DatagramPacket(data,data.length,ia);
 	            t.ds.send(paquet1);
-
-							if(message.elementAt(i).startsWith("EYBG")){
-							t.myIA=tab[4];
-							t.port_udp_suivant=Integer.parseInt(tab[5]);
-						}
 				}
 				}}
 	          }

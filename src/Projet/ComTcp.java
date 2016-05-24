@@ -1,7 +1,9 @@
 package Projet;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.InterruptedIOException;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.InetAddress;
@@ -15,27 +17,28 @@ public class ComTcp implements Runnable{
 
 
 	Entite t;
+	Boolean encore=true;
 
 	public ComTcp(Entite t){
 		this.t=t;
 	}
 
-	public void run() throws RuntimeException{
+	public void run() {
 		try{
 	        ServerSocket server=new ServerSocket(t.port_tcp);
 
-	        while(true)
+	        while(this.encore)
 	        {
-						try{
-	          Socket socket =server.accept();
+	        	try{
+
+	        		System.out.println("Avant la lecture");
+	        		Thread.currentThread().interrupt();
+	        		Socket socket =server.accept();
 	        PrintWriter pw=new PrintWriter(new OutputStreamWriter(socket.getOutputStream()));
 	        BufferedReader br=new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
-
-	        pw.print("WELC "+t.myIA+" "+Integer.toString(t.port_udp_suivant)+"\n");
+	        pw.print("WELC "+t.myIA+" "+Integer.toString(t.port_udp_suivant)+" "+t.ip_diff+" "+Integer.toString(t.port_diff)+"\n");
 	        pw.flush();
-
-
 
 	        String mess=br.readLine();
 					if(mess!=null){
@@ -57,18 +60,25 @@ public class ComTcp implements Runnable{
 	        br.close();
 	        socket.close();
 
-	    }    catch (SystemException e) {
-	          throw new RuntimeException(e);
-	    }
-		}
+	        System.out.println("aprés la lecture");
 
+	        	  } catch (InterruptedIOException e) { // Si l'interruption a été gérée correctement.
+	                  Thread.currentThread().interrupt();
+	                  System.out.println("Interrompu via InterruptedIOException");
+	                  this.encore=false;
+	        } catch (IOException e) {
+	        	System.out.print("2eme \n");
 
-
+	        	this.encore=false;
+	        }}
 	}catch(Exception e){
 				System.out.println(e);
 				e.printStackTrace();	}
 
 	}
+
+
+
 
 
 
