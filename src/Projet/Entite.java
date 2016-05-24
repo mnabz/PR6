@@ -1,4 +1,4 @@
-package projet;
+package Projet;
 
 import java.net.DatagramSocket;
 import java.net.InetAddress;
@@ -11,6 +11,7 @@ import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.util.Enumeration;
+import java.util.Vector;
 
 public class Entite {
 	static String id;
@@ -18,11 +19,14 @@ public class Entite {
 	static int port_udp;
 	static	int port_udp_suivant;
 	static	String myIA;
+	static String myIP;
 	String ip_multi;
 	int port_multi;
 	int a=1024;
 	int b=9999;
 	DatagramSocket ds;
+	static Vector<Long> idMess=new Vector<Long>();
+	static int deco;
 
 	public static String myIA() throws SocketException{
 		String s = null;
@@ -101,6 +105,8 @@ this.port_tcp=portTcp(this.myIA);
 this.id=myId(this.port_tcp,this.myIA);
 this.port_udp_suivant=port_suivant;
 ds=new DatagramSocket(port_udp);
+this.myIP=myIA();
+this.deco=0;
 }
 
 public Entite () throws UnknownHostException, SocketException{
@@ -110,6 +116,8 @@ this.port_udp=portUdp();
 this.id=myId(this.port_tcp,this.myIA);
 this.port_udp_suivant=port_udp;
 ds=new DatagramSocket(port_udp);
+this.myIP=myIA;
+this.deco=0;
 }
 /*
 public void udp() throws InterruptedException, SocketException{
@@ -136,6 +144,18 @@ public void udp() throws InterruptedException, SocketException{
 this.print();
 }*/
 
+public Boolean recherche(String tab[],String message){
+
+int i=0;
+
+while(i<tab.length && !tab[i].equals(message))
+		i++;
+
+if (i==tab.length)
+	return false;
+
+	return true;
+}
 
 public static void print(){
 	System.out.println("port_tcp :"+port_tcp);

@@ -1,4 +1,4 @@
-package projet;
+package Projet;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -22,6 +22,7 @@ import java.util.Enumeration;
 
 
 public class main {
+
 
 	public static int portUdp(){
 
@@ -126,18 +127,27 @@ public class main {
 
 		entite.print();
 
-	Thread t1=new Thread(new ComUdpE(entite));
+	/*Thread t1=new Thread(new ComUdpE(entite));
 	Thread t2=new Thread(new ComUdpR(entite));
-	Thread t3=new Thread(new ComTcp(entite));
-	t1.start();
-	t2.start();
-	t3.start();
-	t1.join();
-	t2.join();
-	t3.join();
+	*/Thread t3=new Thread(new ComTcp(entite));
 
 
 
+/*
+		t1.start();
+		t2.start();
+	*/	t3.start();
+/*
+		t1.join();
+		t2.join();
+		t3.join();
+
+		while(entite.deco!=2);
+
+		System.exit(0);
+*/
+Thread.sleep(3000);
+t3.interrupt();
 
 
 	}

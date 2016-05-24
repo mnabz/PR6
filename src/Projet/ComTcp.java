@@ -1,4 +1,4 @@
-package projet;
+package Projet;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -9,6 +9,8 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.regex.Pattern;
 
+import org.omg.CORBA.SystemException;
+
 public class ComTcp implements Runnable{
 
 
@@ -18,12 +20,13 @@ public class ComTcp implements Runnable{
 		this.t=t;
 	}
 
-	public void run(){
+	public void run() throws RuntimeException{
 		try{
 	        ServerSocket server=new ServerSocket(t.port_tcp);
 
 	        while(true)
 	        {
+						try{
 	          Socket socket =server.accept();
 	        PrintWriter pw=new PrintWriter(new OutputStreamWriter(socket.getOutputStream()));
 	        BufferedReader br=new BufferedReader(new InputStreamReader(socket.getInputStream()));
@@ -54,15 +57,16 @@ public class ComTcp implements Runnable{
 	        br.close();
 	        socket.close();
 
-
-
-	      }
-	      }
-	    catch(Exception e){
-	      System.out.println(e);
-	      e.printStackTrace();
+	    }    catch (SystemException e) {
+	          throw new RuntimeException(e);
 	    }
+		}
 
+
+
+	}catch(Exception e){
+				System.out.println(e);
+				e.printStackTrace();	}
 
 	}
 
