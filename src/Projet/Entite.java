@@ -28,6 +28,8 @@ public class Entite {
 	static Vector<Long> idMess=new Vector<Long>();
 	int deco;
 	int var;
+	String ip_test;
+	String port_test;
 
 	public static String myIA() throws SocketException{
 		String s = null;

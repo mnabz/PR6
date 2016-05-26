@@ -21,7 +21,7 @@ public class ComMulti implements Runnable {
 			while(true){
 				mso.receive(paquet);
 				String st=new String(paquet.getData(),0,paquet.getLength());
-				System.out.println("J'ai reçu :"+st);
+				System.out.println("J'ai reçu diff:"+st);
 			}
 		  	} catch(Exception e){
 		  		e.printStackTrace();

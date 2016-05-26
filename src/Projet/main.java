@@ -135,17 +135,19 @@ public class main {
 	Thread t2=new Thread(new ComUdpR(entite));
 	Thread t3=new Thread(new ComTcp(entite));
 	Thread t4=new Thread(new ComMulti(entite));
-	
+	Thread t5=new Thread(new TestMultiDiff(entite));
 	
 	t1.start();
 	t2.start();
 	t3.start();
 	t4.start();
+	t5.start();
 
 	t1.join();
 	t2.join();
 	t3.join();
 	t4.join();
+	t5.join();
 
 	}
 

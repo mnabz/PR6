@@ -46,7 +46,9 @@ public class Message {
   public String GBYE(String ip,int port,String ip_succ,int port_succ){
     return "MEMB "+Long.toString(this.idm)+" "+ip+" "+Integer.toString(port)+" "+ip_succ+" "+Integer.toString(port_succ);
   }
-
+  public String TEST(String ip_diff, int port_diff){
+      return "TEST "+Long.toString(this.idm)+" "+ip_diff+" "+Integer.toString(port_diff);
+    }
     public String EYBG(){
       return "EYBG "+Long.toString(this.idm);
 

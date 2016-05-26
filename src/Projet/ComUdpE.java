@@ -31,7 +31,8 @@ public class ComUdpE implements Runnable {
 				Message mess = null;
 				Vector<String> message = new Vector<String>();
 				Boolean isExiste = t.recherche(mess.codeMessage, tab[0]);
-
+				
+				Thread.sleep(2000);
 				if (isExiste == true) {
 					// String s=null;
 					// mess =new Message(Long.valueOf(tab[1]).longValue());
@@ -49,7 +50,16 @@ public class ComUdpE implements Runnable {
 						} else if (tab[0].equals("MEMB")) {
 							message.add(st3);
 
-						} else if (tab[0].equals("GBYE")) {
+						}else if (tab[0].equals("TEST")) {
+							if(t.var==0){
+								message.add(st3);
+							}else if(t.var==1){
+								t.var=2;
+								t.ip_test=tab[2];
+								t.port_test=tab[3];
+							}
+
+						}else if (tab[0].equals("GBYE")) {
 							if (tab[2].equals(t.myIA)
 									&& Integer.parseInt(tab[3]) == t.port_udp_suivant) {
 								t.myIA = tab[4];
