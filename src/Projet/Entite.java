@@ -27,6 +27,7 @@ public class Entite {
 	DatagramSocket ds;
 	static Vector<Long> idMess=new Vector<Long>();
 	int deco;
+	int var;
 
 	public static String myIA() throws SocketException{
 		String s = null;

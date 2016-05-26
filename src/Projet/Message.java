@@ -37,7 +37,9 @@ public class Message {
 			return "WHOS "+Long.toString(this.idm);
 	}
 
-
+	public String APPL1(String mess){
+		return "APPL "+Long.toString(idm)+" DIFF#### "+Integer.toString(mess.length())+" "+mess;
+	}
 	public String MEMB(String id,String ip,int port){
 		return "MEMB "+Long.toString(this.idm)+" "+id+" "+ip+" "+Integer.toString(port);
 	}

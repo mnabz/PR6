@@ -31,7 +31,7 @@ public class ComUdpR implements Runnable {
 			  Scanner sc = new Scanner(System.in);
 			  String st="";
 			  st=sc.nextLine();
-
+			  
 
 			  String tab[]=st.split(" ");
 			  Message mess=null;
@@ -51,6 +51,13 @@ public class ComUdpR implements Runnable {
 					 t.idMess.add(mess1.idm);
 					 message.add(mess1.MEMB(t.id, t.myIP, t.port_udp));
 
+					}else if (tab[0].equals("APPL")) {
+						if (tab[1].equals("DIFF####")) {
+						//message.add(st);
+						
+						t.idMess.add(mess.idm);
+						message.add(mess.APPL1(tab[2]));
+						}
 					}else if (tab[0].equals("MEMB"))
 						{System.out.print("MEMB");
 
